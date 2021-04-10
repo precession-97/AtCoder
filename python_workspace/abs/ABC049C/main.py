@@ -4,8 +4,33 @@ import sys
 YES = "YES"  # type: str
 NO = "NO"  # type: str
 
+KEY_DREAM = 5
+KEY_DREAMER = 7
+KEY_ERASE = 5
+KEY_ERASER = 6
 
 def solve(S: str):
+    is_continue = True
+    while(is_continue):
+        if S[:KEY_DREAM] == "dream":
+            if S[:KEY_DREAMER] == "dreamer":
+                if S[:(KEY_DREAMER + 1)] == "dreamera":
+                    S = S[KEY_DREAM:]
+                else:
+                    S = S[KEY_DREAMER:]
+            else:
+                S = S[KEY_DREAM:]
+        elif S[:KEY_ERASE] == "erase":
+            if S[:KEY_ERASER] == "eraser":
+                S = S[KEY_ERASER:]
+            else:
+                S = S[KEY_ERASE:]
+        else:
+            is_continue = False
+    if len(S) == 0:
+        print(YES)
+    else:
+        print(NO)
     return
 
 
