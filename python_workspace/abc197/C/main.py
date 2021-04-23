@@ -1,21 +1,25 @@
-#!/usr/bin/env python3
+# AC by PyPy3
+# TLE by Python3
+
 import sys
 
-INT_MAX = 10000
+INT_MAX = 1 << 30
 
 def solve(N: int, A: "List[int]"):
-    minimum = INT_MAX
-    for idx in range(1, N, 1):
-        left = A[0]
-        for a in A[:idx]:
-            left = left | a
-        right = A[idx]
-        for a in A[idx:]:
-            right = right | a
-        xor = left ^ right
-        if xor <= minimum:
-            minimum = xor
-    print(minimum)
+    _min = INT_MAX
+    # Loop : case of separating sequence
+    for i in range(1 << N):
+        _or = 0
+        _xor = 0
+        # Loop : number of element in sequence
+        for j in range(N):
+            _or |= A[j]
+            if(i & (1 << j)):   # separate or not
+                _xor ^= _or
+                _or = 0
+        _xor ^= _or
+        _min = min(_min, _xor)
+    print(_min)
     return
 
 def main():
