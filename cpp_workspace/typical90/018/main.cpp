@@ -12,15 +12,22 @@ void solve(long long T, long long L, long long X, long long Y, long long Q, std:
         Q : num of question
         E[] : how long minute left
     */
-
-    /*
-        angular velocity
-        omg = 2 * PI / T
-        ferris wheel
-        x = 0
-        y = - (L/2) * sin(omg * t)
-        z = (L/2) * cos(omg * (t - (2/T))) + (L/2)
-    */
+    // angular velocity
+    double omg = 2 * PI / (double)T;
+    
+    for(int i = 0; i < Q; i++) {
+        // ferris wheel pos at Q_i
+        double x = 0.0;
+        double y = -((double)L/2) * sin(omg * (double)E[i]);
+        double z = -((double)L/2) * cos(omg * (double)E[i]) + ((double)L/2);
+        // calc distance
+        double d_d = pow((x - (double)X), 2.0) + pow((y - (double)Y), 2.0) + pow(z, 2.0);
+        double d_u = pow((x - (double)X), 2.0) + pow((y - (double)Y), 2.0);
+        // calc radian
+        double rad = acos(sqrt(d_u/d_d));
+        // radian -> arc degree
+        cout << setprecision(10) << rad * (180 / PI) << endl;
+    }
 }
 
 int main(){
