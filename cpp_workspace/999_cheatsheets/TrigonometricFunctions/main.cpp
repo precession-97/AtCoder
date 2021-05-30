@@ -16,4 +16,11 @@ int main() {
     printf("%.12lf\n", cos(radian));
     printf("%.12lf\n", tan(radian));
     return 0;
+    /*
+        radian -> arc degree
+        deg = rad * (180 / pi);
+
+        arc degree -> radian
+        rad = deg * (pi / 180);
+    */
 }
