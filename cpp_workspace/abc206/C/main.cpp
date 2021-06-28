@@ -3,30 +3,25 @@ using namespace std;
 
 
 void solve(long long N, std::vector<long long> A){
+    
+    long long ans = N * (N - 1) / 2;
+
     sort(A.begin(), A.end());
-    vector<vector<long long>> vv;
-    long long prev = A[0];
-    long long c = 1;
-    for(int i = 1; i < N; i++) {
-        if(A[i] != prev) {
-            vv.push_back({A[i-1], c});
-            c = 1;
+
+    long long same_cnt = 1;
+    long long buf = 0;
+    for(int i = 0; i < N; i++) {
+        if(A[i] == buf) {
+            same_cnt++;
         } else {
-            c = c + 1;
+            ans -= same_cnt * (same_cnt - 1) / 2;
+            same_cnt = 1;
+            buf = A[i];
         }
-        prev = A[i];
     }
-    if(c != 1) {
-        vv.push_back({A[N-1], c});
-    }
+    ans -= same_cnt * (same_cnt - 1) / 2;
 
-    long long cnt = 0;
-    for(int i = 0; i < vv.size(); i++) {
-        long long sub_cnt = N - vv[i][1];
-        cnt = cnt + (sub_cnt * vv[i][1]);
-    }
-
-    cout << cnt/2 << endl;
+    cout << ans << endl;
 }
 
 int main(){
