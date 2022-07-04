@@ -21,6 +21,21 @@ using namespace std;
 
 
 void solve(long long N, std::vector<long long> A){
+    set<long long> st;
+    const long long SUM = 100000;
+    vector<long long> vec(SUM, 0);
+    for(long long a : A) {
+        st.insert(a);
+        vec[a]++;
+    }
+    
+    long long ans = 0;
+    for(long long e : st) {
+        if( e >  (SUM/2)) break;
+        if( e == (SUM/2)) ans += vec[e] * (vec[e]-1) / 2;
+        else ans += vec[e] * vec[SUM - e];
+    }
+    cout << ans << endl;
 
 }
 
