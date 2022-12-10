@@ -20,7 +20,31 @@
 using namespace std;
 
 
-void solve(long long N, long long W, std::vector<long long> w, std::vector<long long> v){
+void solve(long long N, long long W, std::vector<long long> wVec, std::vector<long long> vVec){
+
+    // initialize dp
+    vector<vector<long long>> dp(N+1, vector<long long>(W+1, 1LL >> 60));
+
+    // initial condition
+    for(int n = 0; n <= N; n++) {
+        dp[n][0] = 0;
+    }
+
+    // update dp
+    for(int n = 1; n <= N; n++) {
+        for(int w = 1; w <= W; w++) {
+            if(w - wVec[n] >= 0) {
+                dp[n][w] = max(
+                    dp[n - 1][w],
+                    dp[n - 1][w - wVec[n]] + vVec[n]
+                );
+            } else {
+                dp[n][w] = dp[n - 1][w];
+            }
+        }
+    }
+
+    cout << *max_element(dp[N].begin(), dp[N].end()) << endl;
 
 }
 
@@ -30,9 +54,9 @@ int main(){
     std::scanf("%lld", &N);
     long long W;
     std::scanf("%lld", &W);
-    std::vector<long long> w(N);
-    std::vector<long long> v(N);
-    for(int i = 0 ; i < N ; i++){
+    std::vector<long long> w(N+1);
+    std::vector<long long> v(N+1);
+    for(int i = 1 ; i <= N ; i++){
         std::scanf("%lld", &w[i]);
         std::scanf("%lld", &v[i]);
     }
