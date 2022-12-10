@@ -21,6 +21,23 @@ using namespace std;
 
 
 void solve(long long N){
+    vector<long long> dp(N + 1);
+    
+    // initialize dp
+    for(int i = 0; i <= N; i++) {
+        dp[i] = 0;
+    }
+
+    // initial condition
+    dp[0] = 1;
+    dp[1] = 1;
+
+    // update dp
+    for(int i = 2; i <= N; i++) {
+        dp[i] = dp[i - 1] + dp[i - 2];
+    }
+
+    cout << dp[N] << endl;
 
 }
 
