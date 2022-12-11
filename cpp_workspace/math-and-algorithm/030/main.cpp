@@ -23,7 +23,7 @@ using namespace std;
 void solve(long long N, long long W, std::vector<long long> wVec, std::vector<long long> vVec){
 
     // initialize dp
-    vector<vector<long long>> dp(N+1, vector<long long>(W+1, 1LL >> 60));
+    vector<vector<long long>> dp(N+1, vector<long long>(W+1, -(1LL << 60)));
 
     // initial condition
     for(int n = 0; n <= N; n++) {
