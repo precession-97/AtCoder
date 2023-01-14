@@ -19,8 +19,21 @@
 #include <cassert>
 using namespace std;
 
-
 void solve(long long N, std::vector<long long> A){
+
+    // initialize dp
+    vector<long long> dp(N+1, -(1LL << 60));
+
+    // initial condition
+    dp[1] = A[1];
+    dp[2] = A[2];
+
+    // update dp-table
+    for(int n = 3; n <= N; n++) {
+        dp[n] = max(dp[n-2] + A[n], dp[n-1]);
+    }
+
+    cout << dp[N] << endl;
 
 }
 
@@ -28,8 +41,8 @@ void solve(long long N, std::vector<long long> A){
 int main(){
     long long N;
     std::scanf("%lld", &N);
-    std::vector<long long> A(N);
-    for(int i = 0 ; i < N ; i++){
+    std::vector<long long> A(N+1);
+    for(int i = 1 ; i <= N ; i++){
         std::scanf("%lld", &A[i]);
     }
     solve(N, std::move(A));
