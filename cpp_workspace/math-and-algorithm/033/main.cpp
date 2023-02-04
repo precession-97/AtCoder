@@ -17,10 +17,46 @@
 #include <ctime>
 #include <cstdio>
 #include <cassert>
+#include <iomanip>
 using namespace std;
 
 
 void solve(long long a_x, long long a_y, long long b_x, long long b_y, long long c_x, long long c_y){
+
+    // vector BA
+    long long baX = a_x - b_x;
+    long long baY = a_y - b_y;
+    // vector BC
+    long long bcX = c_x - b_x;
+    long long bcY = c_y - b_y;
+    // vector CA
+    long long caX = a_x - c_x;
+    long long caY = a_y - c_y;
+    // vector CB
+    long long cbX = b_x - c_x;
+    long long cbY = b_y - c_y;
+
+    // inner-product
+    long long ipBaBc = (baX * bcX) + (baY * bcY);
+    long long ipCaCb = (caX * cbX) + (caY * cbY);
+    double ans;
+    if (ipBaBc < 0) {
+
+        ans = sqrt((baX * baX) + (baY * baY));
+
+    } else if (ipCaCb < 0) {
+
+        ans = sqrt((caX * caX) + (caY * caY));
+
+    } else {
+
+        // outer-product
+        long long opBaBc = (baX * bcY) - (baY * bcX);
+        ans = (double) abs(opBaBc) / sqrt((bcX * bcX) + (bcY * bcY));
+
+    }
+
+    cout << fixed << setprecision(7) << ans << endl;
 
 }
 
