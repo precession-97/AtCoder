@@ -17,10 +17,21 @@
 #include <ctime>
 #include <cstdio>
 #include <cassert>
+#include <iomanip>
 using namespace std;
 
 
 void solve(long long N, std::vector<long long> x, std::vector<long long> y){
+
+    double ans = 2000000.0;
+    for(int i = 0; i < N-1; i++) {
+        for(int j = i+1; j < N; j++) {
+            double d = sqrt(pow(x[i] - x[j], 2.0) + pow(y[i] - y[j], 2.0));
+            if(d < ans) ans = d;
+        }
+    }
+
+    cout << fixed << setprecision(15) << ans << endl;
 
 }
 
